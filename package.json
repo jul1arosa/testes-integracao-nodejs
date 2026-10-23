@@ -1,0 +1,20 @@
+{
+  "name": "testes-integracao-n2-e4",
+  "version": "1.0.0",
+  "description": "Atividade N2_E4 — Testes de integração com Node.js, Express, Jest e Supertest.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest --runInBand --verbose",
+    "test:ex1": "jest --runInBand tests/users.integration.test.js",
+    "test:ex2": "jest --runInBand tests/users.http.integration.test.js",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  }
+}

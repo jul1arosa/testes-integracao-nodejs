@@ -1,0 +1,29 @@
+### Verificar se a API está ativa
+GET http://localhost:3000/
+
+### Cadastrar usuário (esperado: 201)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Ana",
+  "email": "ana@exemplo.com"
+}
+
+### Cadastrar o mesmo e-mail de novo (esperado: 409)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Ana",
+  "email": "ana@exemplo.com"
+}
+
+### E-mail vazio (esperado: 400)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Sem Email",
+  "email": ""
+}
