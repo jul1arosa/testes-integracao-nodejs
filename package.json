@@ -8,6 +8,7 @@
     "test": "jest --runInBand --verbose",
     "test:ex1": "jest --runInBand tests/users.integration.test.js",
     "test:ex2": "jest --runInBand tests/users.http.integration.test.js",
+    "test:ex3": "jest --runInBand tests/orders.integration.test.js",
     "test:watch": "jest --watch"
   },
   "dependencies": {

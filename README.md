@@ -52,9 +52,10 @@ Cada exercício separado:
 ```bash
 npm run test:ex1
 npm run test:ex2
+npm run test:ex3
 ```
 
-O resultado esperado é **2 suítes e 7 testes passando**. A imagem em `evidencias/` mostra essa execução.
+O resultado esperado é **3 suítes e 10 testes passando**. A imagem em `evidencias/` mostra essa execução.
 
 ---
 
@@ -66,15 +67,20 @@ src/
 │  ├─ userRepository.js     → Exercícios 1 e 2 (dados dos usuários)
 │  ├─ userService.js        → Exercícios 1 e 2 (regras do cadastro)
 │  └─ userRoutes.js         → Exercício 2 (rota POST /users)
+├─ orders/
+│  ├─ productRepository.js  → Exercício 3 (produtos e estoque)
+│  ├─ orderRepository.js    → Exercício 3 (pedidos)
+│  └─ orderService.js       → Exercício 3 (regras do pedido)
 ├─ app.js                   → Exercício 2 (configura o Express, sem listen())
 └─ server.js                → inicia o servidor para teste manual
 tests/
 ├─ users.integration.test.js       → Exercício 1
-└─ users.http.integration.test.js  → Exercício 2
+├─ users.http.integration.test.js  → Exercício 2
+└─ orders.integration.test.js      → Exercício 3
 examples/
 └─ requests.http           → requisições para teste manual da API
 evidencias/
-└─ image.png
+└─ npm-test-todos-passando.png
 ```
 
 ### Exercício 1 — UserService + UserRepository
@@ -112,6 +118,21 @@ Testes em `tests/users.http.integration.test.js`:
 - **Caso B — e-mail duplicado:** o segundo POST retorna 409 com `{ "error": "EMAIL_ALREADY_EXISTS" }` e o repository continua com apenas 1 registro.
 
 Os testes verificam a resposta HTTP **e também** o estado interno do repository.
+
+### Exercício 3 — Pedido e estoque
+
+```text
+OrderService
+    ↓                ↓
+ProductRepository   OrderRepository
+```
+
+`createOrder(productId, quantity)` localiza o produto, verifica o estoque, calcula o total, diminui o estoque e salva o pedido. Todas as validações são feitas **antes** de alterar qualquer dado, por isso um erro não deixa alterações parciais.
+
+Testes em `tests/orders.integration.test.js`:
+
+- **Caso A — pedido válido:** com estoque 5 e quantidade 2, o pedido tem total 300, é salvo no OrderRepository e o estoque passa para 3.
+- **Caso B — estoque insuficiente:** com estoque 2 e quantidade 5, ocorre erro, nenhum pedido é criado e o estoque continua 2.
 
 ---
 
